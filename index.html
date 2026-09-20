@@ -1,0 +1,255 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CafeFinder</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Intro animation -->
+    <div id="intro-screen">
+        <div id="intro-logo" aria-label="CafeFinder">
+            <span>C</span>
+            <span>a</span>
+            <span>f</span>
+            <span>e</span>
+            <span>F</span>
+            <span>i</span>
+            <span>n</span>
+            <span>d</span>
+            <span>e</span>
+            <span>r</span>
+        </div>
+    </div>
+
+    <!-- Background video -->
+    <video
+        id="background-video"
+        autoplay
+        muted
+        playsinline
+        preload="auto"
+    >
+        <source src="images/cafe-bg.mp4" type="video/mp4">
+    </video>
+
+    <div class="video-overlay"></div>
+
+    <div class="auth-area">
+    <button id="google-signin">
+        Sign in with Google
+    </button>
+
+    <span id="user-info"></span>
+
+    <button id="google-signout" hidden>
+        Sign Out
+    </button>
+</div><!-- Main website -->
+    <main class="hero">
+
+        <h1 class="main-logo">
+            <span class="logo-cup-area" aria-hidden="true">
+                <span class="logo-cup">☕</span>
+                <span class="logo-saucer"></span>
+            </span>
+
+            <span>CafeFinder</span>
+        </h1>
+
+        <p class="tagline">
+            DISCOVER • EXPLORE • RELAX
+        </p>
+
+        <h2>Find your perfect cafe</h2>
+
+        <p>Discover the best cafes around you.</p>
+
+        <button id="location-button">
+            📍 Use My Location
+        </button>
+
+        <p class="search-or">OR</p>
+
+        <!-- Search -->
+        <div class="search-box">
+            <input
+                id="location-input"
+                type="text"
+                placeholder="Enter your city or area"
+            >
+
+            <button id="search-button">
+                Search 🔍
+            </button>
+        </div>
+
+        <!-- Filters -->
+        <div class="filters">
+
+            <select id="ratingFilter" aria-label="Filter by rating">
+                <option value="0">All Ratings</option>
+                <option value="4">4.0+ ⭐</option>
+                <option value="4.5">4.5+ ⭐</option>
+                <option value="4.7">4.7+ ⭐</option>
+            </select>
+
+            <select id="distanceFilter" aria-label="Filter by distance">
+                <option value="0">Any Distance</option>
+                <option value="2">Within 2 km</option>
+                <option value="5">Within 5 km</option>
+                <option value="10">Within 10 km</option>
+            </select>
+
+            <select id="openFilter" aria-label="Filter by opening status">
+                <option value="all">All Cafes</option>
+                <option value="open">Open Now</option>
+                <option value="closed">Closed</option>
+            </select>
+
+        </div>
+
+        <!-- Cafe results: only one container -->
+        <div id="results"></div>
+
+        <!-- Loading -->
+        <div id="loading">
+            <div class="loader-cup">☕</div>
+            <p>Finding cafes near you...</p>
+        </div>
+
+    </main>
+    
+<!-- My Favorites section -->
+
+<section id="favorites-section" hidden>
+    
+
+    <h2>My Favorite Cafes ❤️</h2>
+    <button id="back-to-explore" class="back-button">
+    ← Back to Explore
+</button>
+
+    <div id="favorites-results" class="cafe-grid"></div>
+</section>
+
+    <!-- Bottom navigation -->
+    <nav class="bottom-nav">
+        <h3>☕ CafeFinder</h3>
+        <a href="#" id="favorites-link">My Favorites</a>
+
+        <a href="#" id="explore-link">Explore</a>
+        <a href="#">About</a>
+    </nav>
+
+    <!-- Cafe details modal -->
+    <div id="cafe-modal" class="cafe-modal">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button
+                    id="close-modal"
+                    aria-label="Close modal"
+                >
+                    ✕
+                </button>
+            </div>
+
+            <div class="modal-photos">
+                <img src="images/cofee.jpg" alt="Cafe">
+                <img src="images/cofee.jpg" alt="Cafe">
+                <img src="images/cofee.jpg" alt="Cafe">
+            </div>
+
+            <h2 id="modal-cafe-name">
+                Sample Cafe One
+            </h2>
+
+            <div class="cafe-details">
+
+                <p id="modal-rating">
+                    ⭐ <strong>4.5</strong> · 1,250 reviews
+                </p>
+
+                <p id="modal-address">
+                    📍 Cafe address will appear here
+                </p>
+
+                <p id="modal-phone">
+                    📞 Phone number will appear here
+                </p>
+
+                <p id="modal-website">
+                    🌐 Website will appear here
+                </p>
+
+                <p id="modal-hours">
+                    🕐 Opening hours will appear here
+                </p>
+
+            </div>
+
+            <h3>Reviews</h3>
+
+            <div class="review">
+                <strong>⭐ 5.0</strong>
+                <p>"Great coffee and a nice atmosphere."</p>
+            </div>
+
+            <div class="review">
+                <strong>⭐ 4.0</strong>
+                <p>"Lovely place to relax and work."</p>
+            </div>
+
+            <div class="modal-actions">
+                <button id="modal-navigate">
+                    🧭 Navigate
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Firebase compatibility SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/12.9.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.9.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore-compat.js"></script>
+
+    <!-- Firebase configuration -->
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCwWU_zT45op7RHYf_0275DCZWqTf_KfOU",
+            authDomain: "cafefinder11.firebaseapp.com",
+            projectId: "cafefinder11",
+            storageBucket: "cafefinder11.firebasestorage.app",
+            messagingSenderId: "513559065478",
+            appId: "1:513559065478:web:4334bee9827955594ef207",
+            measurementId: "G-TDWN0SXZ1W"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+    </script>
+
+    <!-- CafeFinder JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+</html>
